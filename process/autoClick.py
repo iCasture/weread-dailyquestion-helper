@@ -1,27 +1,28 @@
 # -*- coding: utf-8 -*-
-import time
-import pyautogui
 import os
+import time
 
-# 屏幕DPR
+import pyautogui
+
+# 屏幕 DPR
 DPR = 2
 
 _region = (0, 40, 420, 750)
 REGION = tuple([v * DPR for v in _region])
 
 cwd = os.getcwd()
-btnBox = os.path.join(cwd, 'img/btnBox.png')
+btnBox = os.path.join(cwd, "img/btnBox.png")
 
 # sc = pyautogui.screenshot(region = REGION)
 # sc.show()
 
 
-class Click:
+class autoClick:
     def __init__(self, offsetx: int, offsety: int):
         self.offsetx = offsetx
         self.offsety = offsety
 
-    # 对找到的location去重
+    # 对找到的 location 去重
     def unify(self, locations):
         dict = {}
         for location in locations:
@@ -31,8 +32,7 @@ class Click:
         return list(dict.values())
 
     def run(self, appImg, answers, rightAnswer):
-        locations = pyautogui.locateAllOnScreen(
-            btnBox, region=REGION, confidence=0.9)
+        locations = pyautogui.locateAllOnScreen(btnBox, region=REGION, confidence=0.9)
         locations = [v for v in locations]
 
         unifyLocations = self.unify(locations)
@@ -49,12 +49,13 @@ class Click:
                 time.sleep(0.05)
                 pyautogui.click(x / DPR, y / DPR)
             else:
-                print('--无法自动化操作--', rightAnswerIdx, unifyLocations, locations)
+                print("--无法自动化操作--", rightAnswerIdx, unifyLocations, locations)
         except:
-            print('自动化报错：', rightAnswerIdx, unifyLocations, locations)
+            print("自动化报错：", rightAnswerIdx, unifyLocations, locations)
 
         # return self._splitCapture(img)
 
-# cc = Click(0, 77)
+
+# cc = autoClick(0, 77)
 
 # cc.run(None, None, None)

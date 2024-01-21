@@ -1,0 +1,7 @@
+{
+  "APP_ID": "xxxxxx",
+  "API_KEY": "xxxxxx",
+  "SECRET_KEY": "xxxxxx",
+  "BAIDU_COOKIE": "百度账号 cookie: 打开百度首页并登录, 浏览器打开开发者工具, 从网络请求头中找到 cookie 复制到这里, 注意双引号前加斜线",
+  "GOOGLE_COOKIE": "谷歌账号 cookie: 打开谷歌首页并登录, 浏览器打开开发者工具, 从网络请求头中找到 cookie 复制到这里, 注意双引号前加斜线"
+}

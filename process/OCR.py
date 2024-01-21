@@ -1,27 +1,27 @@
 # -*- coding: utf-8 -*-
-from aip import AipOcr
 import io
 
-class OCR:
+from aip import AipOcr
 
+
+class OCR:
     def __init__(self, appId, apiKey, secretKey):
         self.client = AipOcr(appId, apiKey, secretKey)
 
     def _pil2bin(self, pilObj):
         bin = io.BytesIO()
-        pilObj.save(bin, format='PNG')
+        pilObj.save(bin, format="PNG")
         return bin.getvalue()
 
     def _ocr(self, img):
         imgBin = self._pil2bin(img)
         return self.client.basicGeneral(imgBin)
 
-    def run(self, quesImg, answImg):
-        ques = self._ocr(quesImg)
-        answ = self._ocr(answImg)
+    def run(self, questionImg, optionsImg):
+        question = self._ocr(questionImg)
+        options = self._ocr(optionsImg)
 
-        ques = ''.join([item['words'] for item in ques['words_result']])
-        answ = [item['words'] for item in answ['words_result']]
+        question = "".join([item["words"] for item in question["words_result"]])
+        options = [item["words"] for item in options["words_result"]]
 
-        return ques, answ
-
+        return question, options

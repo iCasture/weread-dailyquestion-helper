@@ -1,12 +1,44 @@
-*/__pycache__
-.vscode
-/*.jpg
-/*.png
-config.json
-*test.py
-/test/
-/output/images/*.png/
-/output/images/*.jpg/
-/output/*.html/
-/output/*.txt/
- 
+# General
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Images
+/output/images/*.png
+/output/images/*.jpg
+
+# Python
+__pycache__/
+/.venv/
+
+# VSCode
+/.vscode/
+
+# Config
+/config.json
+
