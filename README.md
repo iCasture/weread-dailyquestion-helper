@@ -16,11 +16,13 @@
 
 2. OCR 识别问题和答案；
 
-3. 根据问题去百度搜答案；
+3. 根据问题去谷歌 / 百度搜答案；
 
     > 选择答案的依据是：以问题作为关键字进行搜索，在搜索结果的首页中，选择出现频率最高的答案选项作为候选结果，并把它的上下文作为「依据」，一并输出。
 
 4. 自动寻找答案位置并作答；
+
+    > 可选，在 `main.py` 中由 `isAutoClick` 配置，默认关闭。
 
 5. 循环执行 1、2、3、4。
 
@@ -44,7 +46,7 @@
 >
 > 1. 因为 macOS 没办法获取到小程序的窗口，所以需要手动测量小程序窗口大小，调整题目和答案位置。需要修改的参数位于 `process/screenCapture.py` 文件中。
 >
->     截图效果会输出在 `output/images` 目录下，可参考校对位置（需要先去挑去掉 `img.save`、`quesImg.save`、`ansImg.sav` 这三行的注释，将小程序窗口至于最前，然后执行 `main.py` 文件）。
+>     截图效果会输出在 `output/images` 目录下，可参考校对位置（需要先去挑去掉 `img.save`、`quesImg.save`、`optionsImg.sav` 这三行的注释，将小程序窗口至于最前，然后执行 `main.py` 文件）。
 >
 > 2. macOS 下需要在系统设置对执行 `main.py` 文件的 App 赋予「录屏」权限（例如 iTerm、VSCode 等），否则截图只能截取到桌面背景。参考：[PIL ImagineGrab only returns background image on Mac not a screen grab like I thought](https://stackoverflow.com/questions/67140184/pil-imaginegrab-only-returns-background-image-on-mac-not-a-screen-grab-like-i-th)。
 >

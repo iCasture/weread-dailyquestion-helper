@@ -26,40 +26,40 @@ def isSame(imgA, imgB):
 
 
 if __name__ == "__main__":
-    quesImg, answImg = None, None
-    tmpQuesText = ""
+    questionImg, optionsImg = None, None
+    tmpQuestionText = ""
 
     while True:
-        tmpQuesImg, tmpAnswImg, appImg = screenCapture().run()
+        tmpQuestionImg, tmpOptionsImg, appImg = screenCapture().run()
 
-        # print(tmpQuesImg)
-        # print(tmpAnswImg)
+        # print(tmpQuestionImg)
+        # print(tmpOptionsImg)
 
-        if not isSame(quesImg, tmpQuesImg):
-            quesImg, answImg, appImg = tmpQuesImg, tmpAnswImg, appImg
+        if not isSame(questionImg, tmpQuestionImg):
+            questionImg, optionsImg, appImg = tmpQuestionImg, tmpOptionsImg, appImg
             config = getOCRConfig()
-            ques, answ = OCR(
+            question, options = OCR(
                 config["APP_ID"], config["API_KEY"], config["SECRET_KEY"]
-            ).run(quesImg, answImg)
+            ).run(questionImg, optionsImg)
 
             # 如果匹配到 victory / defeat 则退出程序
             if re.search(
-                "victory|defeat|defert|自动匹配|排行榜|看广告", "".join(answ), flags=re.I
+                "victory|defeat|defert|自动匹配|排行榜|看广告", "".join(options), flags=re.I
             ):
                 sys.exit()
 
-            if len(ques) > 0 and (tmpQuesText != ques):
-                tmpQuesText = ques
+            if len(question) > 0 and (tmpQuestionText != question):
+                tmpQuestionText = question
 
-                freq, rightAnswer, hint = Query().run(ques, answ)
+                freq, rightOption, hint = Query().run(question, options)
 
-                if rightAnswer is not None:
-                    print("问题: {}".format(ques))
-                    print("\033[1;47;32m正确答案: {}\033[0m".format(rightAnswer))
+                if rightOption is not None:
+                    print("问题: {}".format(question))
+                    print("\033[1;47;32m正确答案: {}\033[0m".format(rightOption))
                     freqText = ""
                     for index in range(len(freq)):
                         freqText += (
-                            answ[index]
+                            options[index]
                             + " :"
                             + str(round(100 * freq[index], 1))
                             + "%    "
@@ -68,7 +68,7 @@ if __name__ == "__main__":
                     print("依据: {}".format(hint))
 
                     if isAutoClick:
-                        autoClick(0, 40).run(appImg, answ, rightAnswer)
+                        autoClick(0, 40).run(appImg, options, rightOption)
 
                     print("-----------------")
                     print()

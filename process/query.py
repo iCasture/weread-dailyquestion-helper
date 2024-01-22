@@ -67,41 +67,41 @@ class Query:
             return None
         return knowledge
 
-    def _query(self, knowledge, answers):
-        freq = [knowledge.count(item) + 1 for item in answers]
-        rightAnswer = None
+    def _query(self, knowledge, options):
+        freq = [knowledge.count(item) + 1 for item in options]
+        rightOption = None
         hint = None
 
-        if freq.count(1) == len(answers):
+        if freq.count(1) == len(options):
             freqDict = {}
-            for item in answers:
+            for item in options:
                 for char in item:
                     if char not in freqDict:
                         freqDict[char] = knowledge.count(item)
-            for index in range(len(answers)):
-                for char in answers[index]:
+            for index in range(len(options)):
+                for char in options[index]:
                     freq[index] += freqDict[char]
-            rightAnswer = answers[freq.index(max(freq))]
+            rightOption = options[freq.index(max(freq))]
         else:
-            rightAnswer = answers[freq.index(max(freq))]
+            rightOption = options[freq.index(max(freq))]
             threshold = 50  # 前后 50 字符
-            hintIndex = max(knowledge.index(rightAnswer), threshold)
+            hintIndex = max(knowledge.index(rightOption), threshold)
             hint = "".join(
                 knowledge[hintIndex - threshold : hintIndex + threshold].split()
             )
 
         sum = reduce(lambda a, b: a + b, freq)
-        return [f / sum for f in freq], rightAnswer, hint
+        return [f / sum for f in freq], rightOption, hint
 
-    def run(self, question, answers):
-        if len(answers) <= 0:
+    def run(self, question, options):
+        if len(options) <= 0:
             return [], None, None
         knowledge = None
         while knowledge is None:
             knowledge = self._getKnowledge(question)
         try:
-            freq, rightAnswer, hint = self._query(knowledge, answers)
+            freq, rightOption, hint = self._query(knowledge, options)
         except Exception as e:
             print("出现异常", e)
-            freq, rightAnswer, hint = [], None, None
-        return freq, rightAnswer, hint
+            freq, rightOption, hint = [], None, None
+        return freq, rightOption, hint

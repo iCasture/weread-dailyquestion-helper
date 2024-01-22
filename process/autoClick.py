@@ -31,27 +31,27 @@ class autoClick:
 
         return list(dict.values())
 
-    def run(self, appImg, answers, rightAnswer):
+    def run(self, appImg, options, rightOption):
         locations = pyautogui.locateAllOnScreen(btnBox, region=REGION, confidence=0.9)
         locations = [v for v in locations]
 
         unifyLocations = self.unify(locations)
         locationsLen = len(unifyLocations)
 
-        rightAnswerIdx = answers.index(rightAnswer)
+        rightOptionIdx = options.index(rightOption)
 
         try:
-            if rightAnswerIdx >= 0 and locationsLen > 0 and locationsLen < 4:
-                rightLocation = unifyLocations[rightAnswerIdx]
+            if rightOptionIdx >= 0 and locationsLen > 0 and locationsLen < 4:
+                rightLocation = unifyLocations[rightOptionIdx]
                 x, y = pyautogui.center(rightLocation)
 
                 pyautogui.click(x / DPR, y / DPR)
                 time.sleep(0.05)
                 pyautogui.click(x / DPR, y / DPR)
             else:
-                print("--无法自动化操作--", rightAnswerIdx, unifyLocations, locations)
+                print("--无法自动化操作--", rightOptionIdx, unifyLocations, locations)
         except:
-            print("自动化报错：", rightAnswerIdx, unifyLocations, locations)
+            print("自动化报错：", rightOptionIdx, unifyLocations, locations)
 
         # return self._splitCapture(img)
 
