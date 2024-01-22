@@ -46,7 +46,7 @@
 >
 > 1. 因为 macOS 没办法获取到小程序的窗口，所以需要手动测量小程序窗口大小，调整题目和答案位置。需要修改的参数位于 `process/screenCapture.py` 文件中。
 >
->     截图效果会输出在 `output/images` 目录下，可参考校对位置（需要先去挑去掉 `img.save`、`quesImg.save`、`optionsImg.sav` 这三行的注释，将小程序窗口至于最前，然后执行 `main.py` 文件）。
+>     调试方法：修改相应参数后，打开 Python 终端，执行 `from process.screenCapture import screenCapture`，然后再执行 `screenCapture().run(positionDebug=True)`。截图效果会输出在 `output/images` 目录下，可参考校对位置。
 >
 > 2. macOS 下需要在系统设置对执行 `main.py` 文件的 App 赋予「录屏」权限（例如 iTerm、VSCode 等），否则截图只能截取到桌面背景。参考：[PIL ImagineGrab only returns background image on Mac not a screen grab like I thought](https://stackoverflow.com/questions/67140184/pil-imaginegrab-only-returns-background-image-on-mac-not-a-screen-grab-like-i-th)。
 >
